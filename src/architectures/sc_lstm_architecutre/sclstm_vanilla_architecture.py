@@ -21,7 +21,7 @@ def sc_lstm_decoder(text_idx, text_one_hot, dialogue_act, nclasses, sample_out_s
     lstm = SC_LSTM(
         lstm_size,
         nclasses,
-        softmax_temperature=temperature,
+        softmax_temperature=None,
         return_da=True,
         return_state=False,
         use_bias=True,
@@ -86,12 +86,12 @@ def generator_model(config_dict: Dict, mr_vec_lengths: Dict[str, int], surface_l
         name='one_hot_out_embeddings'
     )
 
-    output_one_hot_embeddings_worddrop = one_hot_out_embeddings(word_dropout)
+    #output_one_hot_embeddings_worddrop = one_hot_out_embeddings(word_dropout)
     output_one_hot_embeddings = one_hot_out_embeddings(output_idx)
 
     dialogue_act = concatenate(inputs=inputs)
 
-    decoder = sc_lstm_decoder(output_idx, output_one_hot_embeddings_worddrop, dialogue_act, nclasses, sample_out_size, lstm_size, inputs, step)
+    decoder = sc_lstm_decoder(output_idx, output_one_hot_embeddings, dialogue_act, nclasses, sample_out_size, lstm_size, inputs, step)
 
     def vae_cross_ent_loss(args):
         x_truth, x_decoded_final = args
