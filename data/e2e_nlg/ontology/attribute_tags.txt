@@ -1,0 +1,8 @@
+name=XNAMEX
+eatType=XEATX
+priceRange=XPRICX
+customer rating=XCUSTX
+near=XNESRX
+food=XFOODX
+area=XAREAX
+familyFriendly=XFAMX
