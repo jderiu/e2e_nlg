@@ -101,3 +101,8 @@ logging/
 preprocessed_data/
 outputs/
 models/
+
+!models/README.md
+!outputs/README.md
+!preprocessed_data/README.md
+!logging/README.md
