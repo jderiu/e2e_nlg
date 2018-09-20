@@ -37,7 +37,7 @@
   "logging_tag": "follow_fw",
   "lstm_size": 1024,
   "lstm_batch_size": 256,
-  "nb_epochs": 250,
+  "nb_epochs": 101,
   "out_frequency": 10,
   "output_dir": "outputs/sc_follow_fw",
   "lex_dummies": {

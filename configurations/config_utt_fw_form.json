@@ -1,1 +1,46 @@
-{"delex_attributes": ["name", "near", "food"], "data_base_path": "data/e2e_nlg/", "attributes": "ontology/attribute_tags.txt", "train_data": "trainset.csv", "valid_data": "devset.csv", "test_data": "testset.csv", "valid_data_mr_only": "devset_mr_only.csv", "test_data_mr_only": "test_mr_only.csv", "character_vocabulary": "vocabulary.json", "form_vocab": "ontology/feature_value_idx.pkl", "processing_tag": "version1", "max_sentence_len": 256, "sample_constants": {"utt_fw": 15, "follow_fw": 10, "form": 10}, "pretrain_epochs": 100, "pretrain_batch_size": 1000, "pretrain_model_path": "models/pretrained_classifiers", "nb_filter": 200, "filter_length": 3, "nlayers": 2, "intermediate_dim": 200, "surface_features": {"form": "", "utt_fw": ""}, "sclstm_model_path": "models/sc_utt_fw_form", "logging_tag": "utt_fw_form", "lstm_size": 1024, "lstm_batch_size": 256, "nb_epochs": 250, "out_frequency": 10, "output_dir": "outputs/sc_utt_fw_form", "lex_dummies": {"name": "Blue Spice", "near": "Burger King", "food": "Italian"}}
+{
+  "delex_attributes": [
+    "name",
+    "near",
+    "food"
+  ],
+  "data_base_path": "data/e2e_nlg/",
+  "attributes": "ontology/attribute_tags.txt",
+  "train_data": "trainset.csv",
+  "valid_data": "devset.csv",
+  "test_data": "testset.csv",
+  "valid_data_mr_only": "devset_mr_only.csv",
+  "test_data_mr_only": "test_mr_only.csv",
+  "character_vocabulary": "vocabulary.json",
+  "form_vocab": "ontology/feature_value_idx.pkl",
+  "processing_tag": "version1",
+  "max_sentence_len": 256,
+  "sample_constants": {
+    "utt_fw": 15,
+    "follow_fw": 10,
+    "form": 10
+  },
+  "pretrain_epochs": 100,
+  "pretrain_batch_size": 1000,
+  "pretrain_model_path": "models/pretrained_classifiers",
+  "nb_filter": 200,
+  "filter_length": 3,
+  "nlayers": 2,
+  "intermediate_dim": 200,
+  "surface_features": {
+    "form": "",
+    "utt_fw": ""
+  },
+  "sclstm_model_path": "models/sc_utt_fw_form",
+  "logging_tag": "utt_fw_form",
+  "lstm_size": 1024,
+  "lstm_batch_size": 256,
+  "nb_epochs": 101,
+  "out_frequency": 10,
+  "output_dir": "outputs/sc_utt_fw_form",
+  "lex_dummies": {
+    "name": "Blue Spice",
+    "near": "Burger King",
+    "food": "Italian"
+  }
+}

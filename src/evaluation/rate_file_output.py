@@ -1,15 +1,10 @@
 import argparse, json, os
-import argparse, json, os, itertools, random
-import keras.backend as K
 import numpy as np
 from src.data_processing.surface_feature_vectors import _load_vectorized_data
 from src.data_processing.utils import PREPROCESSED_DATA, convert2indices
 from src.data_processing.delexicalise_data import _delexicalise, _get_delex_fields, _load_attributes
-from src.architectures.sc_lstm_architecutre.sclstm_vanilla_architecture import generator_model
 from src.data_processing.vectorize_data import _compute_vector_length
 from src.training.train_classifiers import load_discriminators
-
-from tqdm import tqdm
 
 from typing import Dict, List, Tuple
 
@@ -21,7 +16,7 @@ def get_discr_ratings_single(predicted_sentences, discriminators, da_acts) -> Li
 
         discriminator = discriminators[attribute]
 
-        ypred_full = discriminator.predict(predicted_sentences, batch_size=1024)
+        ypred_full = discriminator.predict(predicted_sentences, batch_size=1024, verbose=1)
         scores = []
         for ypred, ytrue in zip(ypred_full, ytrue_full):
 
@@ -46,7 +41,7 @@ if __name__ == '__main__':
 
     config_fname = args.config
 
-    config_dict = json.load(open(os.path.join('configurations/data_processing_config_correct_syntax', config_fname)))
+    config_dict = json.load(open(os.path.join('configurations', config_fname)))
 
     # filename
     valid_data_mr_only = config_dict['valid_data_mr_only']
@@ -69,6 +64,9 @@ if __name__ == '__main__':
 
     test_data_delex = _load_vectorized_data(delex_data_path, test_data_mr_only)#parsed_mrs, vectorised_mrs, sample (syntactic man type-> vector)
     parsed_mrs = test_data_delex['parsed_mrs']
+    vectorised_mrs = test_data_delex['vectorised_mrs']
+
+    test_data_delex = None
 
     mr_file = open(os.path.join(data_base_path, PREPROCESSED_DATA, out_tag, 'mr_data_ontology.json'), 'rt', encoding='utf-8')
     mr_data_ontology = json.load(mr_file) #atribute -> values -> idx
@@ -83,13 +81,13 @@ if __name__ == '__main__':
     delex_fields = _get_delex_fields(attribute_tokens, delex_attributes)
 
     #raw_input = [x.replace('\n', '') for x in open('outputs/tgen/tgen_e2e_outputs_test.txt', 'rt', encoding='utf-8').readlines()]
-    raw_input = [x.replace('\n', '') for x in open('outputs/tgen/tgen_e2e_outputs_test.txt', 'rt', encoding='utf-8').readlines()]
+    raw_input = [x.replace('\n', '') for x in open('outputs/sc_utt_fw/final_output_test.txt', 'rt', encoding='utf-8').readlines()]
 
     delex_input = _delexicalise(parsed_mrs, raw_input, delex_fields)
 
     test_idx = convert2indices(delex_input, char_vocab, dummy_char, unk_char, max_sentence_len)
 
-    discr_scores = get_discr_ratings_single(test_idx, discriminators, test_data_delex['vectorised_mrs'])
+    discr_scores = get_discr_ratings_single(test_idx, discriminators, vectorised_mrs)
 
     full_scores = [np.sum(x) for x in discr_scores]
 

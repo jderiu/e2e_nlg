@@ -141,7 +141,8 @@ def _merge_str_ratings(str_output, confidence_ratings, ratings):
     return merged_output
 
 
-def select_top_outputs(merged_output, selection_score_idx=-1):
+def select_top_outputs(merged_output, selection_score_idx=-2):
+    #selection score idx, -2: sort by classifier scores, -1 sort by confidence score
     filtered_output = []
     for merged_batch in merged_output:
         max_score = max([x[-1][selection_score_idx] for x in merged_batch])
@@ -170,7 +171,7 @@ def _lexicalise_full_output(sampled_output: List[List[Tuple[str, List[int]]]], d
                     original_token = lex_dummies.get(lex_key, '')
 
                 oline = oline.replace(val, original_token)
-                oline = oline.replace('The The', 'The').replace('food food', 'food').replace('the The', 'The')
+                oline = oline.replace('The The', 'The').replace('food food', 'food').replace('the The', 'The') #postprocessing for some common errors
 
             lexicalised_batch.append(oline + '\n')
         lexicalised_output.append(lexicalised_batch)
