@@ -1,1 +1,2 @@
-# e2e_nlg_keras
+# E2E NLG
+
