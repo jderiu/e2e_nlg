@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"> </script>
+</head>
+<body>
+
+    <form id="nlg" class="form-signin"  method="POST" target="receiver" action="http://127.0.0.1:9999/generate_utterance">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        Restaurant Name: <input class="form-control" type="text" required name="name" placeholder="Name"><br>
+        Close to: <input class="form-control" type="text" name="near" placeholder="Near"><br>
+        Foot Type<input class="form-control" type="text" name="food" placeholder="Food"><br>
+        Family Friendly: <select name="familyFriendly" form="nlg">
+            <option value=""> - </option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br>
+        Price Range: <select name="priceRange" form="nlg">
+            <option value=""> - </option>
+            <option value="cheap">Cheap</option>
+            <option value="high">High</option>
+            <option value="less than £20"> Less than $20 </option>
+            <option value="moderate">Moderate</option>
+            <option value="more than £30">More than $30</option>
+            <option value="£20-25">$20 - 25</option>
+        </select><br>
+        Customer Rating: <select name="customer rating" form="nlg">
+            <option value=""> - </option>
+            <option value="1 out of 5">1/5</option>
+            <option value="3 out of 5">3/5</option>
+            <option value="5 out of 5">5/5</option>
+            <option value="average">Average</option>
+            <option value="high">Hgh</option>
+            <option value="low">Low</option>
+        </select><br>
+        Area: <select name="area" form="nlg">
+            <option value=""> - </option>
+            <option value="city centre">City Centre</option>
+            <option value="riverside">Riverside</option>
+        </select><br>
+        Type: <select name="eatType" form="nlg">
+            <option value=""> - </option>
+            <option value="coffee shop">Coffee Shop</option>
+            <option value="pub">Pub</option>
+            <option value="restaurant">Restaurant</option>
+        </select><br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit"  >Generate</button>
+    </form>
+
+
+
+<iframe name="receiver" id="receiver" width="1000" height="1000"></iframe>
+
+</body>
+</html>
