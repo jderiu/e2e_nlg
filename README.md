@@ -1,6 +1,6 @@
 
 # E2E NLG
-Code for the INLG 2018 conference paper "Syntactic Manipulation for Generating more Diverse and Interesting Texts"
+Code for the INLG 2018 conference paper [*Syntactic Manipulation for Generating more Diverse and Interesting Texts*](http://aclweb.org/anthology/W18-6503)
 
 # Setup & Requirements
 We assume an [Anaconda](https://www.anaconda.com/download/) installation. To install the Conda environment run:
@@ -51,7 +51,7 @@ This creates a file called "rule_based_eval.txt" inside the "outputs/sc_{name_of
 # References
 Please cite the following paper when using this code or pretrained models for your application.
 
-  Jan Deriu and Mark Cieliebak, [*Syntactic Manipulation for Generating more Diverse and Interesting Texts*]() INLG 2018 - [International Conference on Natural Language Generation](https://inlg2018.uvt.nl/)
+  Jan Deriu and Mark Cieliebak, [*Syntactic Manipulation for Generating more Diverse and Interesting Texts*](http://aclweb.org/anthology/W18-6503) INLG 2018 - [International Conference on Natural Language Generation](https://inlg2018.uvt.nl/)
 
 ```
 @inproceedings{deriu2018nlg,
