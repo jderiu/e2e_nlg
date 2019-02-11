@@ -26,7 +26,7 @@ def _utt_fw_features(sent_tok_texts: List[List[List[str]]], vocab: Dict[str, int
     return np.concatenate(utt_fw_vec, axis=1).T
 
 
-def _utterance_first_word_vocab(sent_tok_texts: List[List[List[str]]]) -> Dict[str, int]:
+def _utterance_first_word_vocab(sent_tok_texts: List[List[List[str]]], min_freq=100) -> Dict[str, int]:
     """
     Extract the first words present in the corpus. Only use the ones that appear at more than 100 times.
     :param sent_tok_texts: Tokenized Texts
@@ -40,7 +40,7 @@ def _utterance_first_word_vocab(sent_tok_texts: List[List[List[str]]]) -> Dict[s
     vocab = {}
     counter = 0
     for token, freq in fw_freq.items():
-        if freq > 100:
+        if freq > min_freq:
             vocab[token] = counter
             counter += 1
 

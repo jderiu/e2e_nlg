@@ -54,7 +54,7 @@ def _vectorize_mrs(preprocessed_mrs: List[Dict[str, str]], mr_ontology: Dict[str
         full_vectors.append(vec)
 
     #creat the format attribute name -> List of processed vectors
-    vectorised_mrs = {}
+    vectorised_mrs = dict()
     for attr in mr_ontology.keys():
         attr_vectors = []
         for da_vec_kv in full_vectors:

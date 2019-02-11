@@ -155,7 +155,7 @@ def _retrieve_mr_ontology(full_mr_list: List[Dict[str, str]]) -> Dict[str, Dict[
     return attr_value_pair_ontology
 
 
-def _delex_nlg_data(fname, config_dict) -> Dict[str, object]:
+def delex_nlg_data(fname, config_dict) -> Dict[str, object]:
     """
     Calls the delexicalization pipeline, which consists of loading the raw data, parsing the MR, delexicalizing the raw_references.
     :param fname: name of the datafile
@@ -163,16 +163,28 @@ def _delex_nlg_data(fname, config_dict) -> Dict[str, object]:
     :return: results consisting of the raw mrs, parsed mrs, the raw references, and the delexicalized references
     """
     data_base_path = config_dict['data_base_path']
-    fname = os.path.join(data_base_path, fname)
+    delex_attributes = config_dict['delex_attributes']
+    attribute_fname =  config_dict['attributes']
+
+    return _delex_nlg_data(fname, data_base_path, delex_attributes, attribute_fname)
+
+
+def _delex_nlg_data(fname, data_path, delex_attributes, attribute_fname):
+    """
+    Calls the delexicalization pipeline, which consists of loading the raw data, parsing the MR, delexicalizing the raw_references.
+    :param fname: name of the datafile
+    :param config_dict: dictionary with the configurations
+    :return: results consisting of the raw mrs, parsed mrs, the raw references, and the delexicalized references
+    """
+    fname = os.path.join(data_path, fname)
 
     mr_raw, outputs_raw = _read_data(fname)
     parsed_mrs = _parse_raw_mr(mr_raw)
 
-    attribute_path = os.path.join(data_base_path, config_dict['attributes'])
+    attribute_path = os.path.join(data_path, attribute_fname)
     attribute_tokens = _load_attributes(attribute_path)
-    delex_attributes = config_dict['delex_attributes']
 
-    #which fields to delexicalize and the token used to delexicalize.
+    # which fields to delexicalize and the token used to delexicalize.
     delex_fields = _get_delex_fields(attribute_tokens, delex_attributes)
     delexicalised_texts = _delexicalise(parsed_mrs, outputs_raw, delex_fields)
 
@@ -205,15 +217,15 @@ if __name__ == '__main__':
     logging.info('Delexicalising Training Data..')
 
     train_fname = config_dict['train_data']
-    train_delex = _delex_nlg_data(train_fname, config_dict)
+    train_delex = delex_nlg_data(train_fname, config_dict)
 
     logging.info('Delexicalising Validation Data..')
     valid_fname = config_dict['valid_data']
-    valid_delex = _delex_nlg_data(valid_fname, config_dict)
+    valid_delex = delex_nlg_data(valid_fname, config_dict)
 
     logging.info('Delexicalising Test Data..')
     test_fname = config_dict['test_data']
-    test_delex = _delex_nlg_data(test_fname, config_dict)
+    test_delex = delex_nlg_data(test_fname, config_dict)
 
     full_mr_list = train_delex['parsed_mrs'] + valid_delex['parsed_mrs'] + test_delex['parsed_mrs']
 

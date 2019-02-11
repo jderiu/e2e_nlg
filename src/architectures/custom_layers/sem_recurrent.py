@@ -72,7 +72,6 @@ class SC_LSTM(Recurrent):
             self.recurrent_dropout = min(1., max(0., recurrent_dropout))
             self.sc_dropout = min(1., max(0., sc_dropout))
 
-
         def build(self, input_shape):
             assert isinstance(input_shape, list) or isinstance(input_shape, tuple)
 
