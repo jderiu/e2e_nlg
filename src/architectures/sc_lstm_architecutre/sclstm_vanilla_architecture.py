@@ -105,6 +105,7 @@ def generator_model(config_dict: Dict, mr_vec_lengths: Dict[str, int], surface_l
     def da_loss_fun(args):
         da = args[0]
         sq_da_t = K.square(da)
+        K.l2_normalize(da, axis=1)
         sum_sq_da_T = K.sum(sq_da_t, axis=1)
         return sum_sq_da_T
 

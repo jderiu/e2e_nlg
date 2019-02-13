@@ -12,7 +12,6 @@ class LexFeatureOutputCallbackVanilla(Callback):
         self.delimiter = delimiter
         self.fname = fname
         self.lex_dict = lex_dict
-        self.config_data = config_data
         self.discriminators = discriminators
         self.da_acts = da_acts
         self.delex_vocab = delex_vocab

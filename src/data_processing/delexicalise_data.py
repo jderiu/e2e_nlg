@@ -166,10 +166,13 @@ def delex_nlg_data(fname, config_dict) -> Dict[str, object]:
     delex_attributes = config_dict['delex_attributes']
     attribute_fname =  config_dict['attributes']
 
-    return _delex_nlg_data(fname, data_base_path, delex_attributes, attribute_fname)
+    attribute_path = os.path.join(data_base_path, attribute_fname)
+    attribute_tokens = _load_attributes(attribute_path)
+
+    return _delex_nlg_data(fname, data_base_path, delex_attributes, attribute_tokens)
 
 
-def _delex_nlg_data(fname, data_path, delex_attributes, attribute_fname):
+def _delex_nlg_data(fname, data_path, delex_attributes, attribute_tokens):
     """
     Calls the delexicalization pipeline, which consists of loading the raw data, parsing the MR, delexicalizing the raw_references.
     :param fname: name of the datafile
@@ -180,9 +183,6 @@ def _delex_nlg_data(fname, data_path, delex_attributes, attribute_fname):
 
     mr_raw, outputs_raw = _read_data(fname)
     parsed_mrs = _parse_raw_mr(mr_raw)
-
-    attribute_path = os.path.join(data_path, attribute_fname)
-    attribute_tokens = _load_attributes(attribute_path)
 
     # which fields to delexicalize and the token used to delexicalize.
     delex_fields = _get_delex_fields(attribute_tokens, delex_attributes)
