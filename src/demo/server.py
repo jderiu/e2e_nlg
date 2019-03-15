@@ -31,7 +31,7 @@ def main(args):
     @app.route('/generate_utterance', methods=['POST'])
     def generate_utterance():
         process_mr = flask.request.form.to_dict()
-        process_mr = {k: v for k,v in process_mr.items() if not v == ''}
+        process_mr = {k: v for k, v in process_mr.items() if not v == ''}
         outputs, scores = model.generate_utterance_for_mr([process_mr])
         random.shuffle(outputs)
         oline = ''
