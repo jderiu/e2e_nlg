@@ -12,7 +12,7 @@ import logging
 from src.demo.demo_utils import NLGModel
 import json
 
-host = "127.0.0.1"
+host = "0.0.0.0"
 port = 5000
 
 
