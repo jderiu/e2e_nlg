@@ -63,6 +63,7 @@ class NLGModel():
         str_out = convert_idx2char(self.config_dict, output_idx)
         merge_out_ratings = _merge_str_ratings(str_out, confidence_scores, ratings)
         top_outputs = select_top_outputs(merge_out_ratings)
+        scores = [x[1][8] for x in top_outputs[0]]
 
-        top_out = _lexicalise_full_output(top_outputs, self.delex_fields, result, self.lex_dummies)
-        return top_out[0]
+        top_out = _lexicalise_full_output(top_outputs, self.delex_fields, result, self.lex_dummies, print_score=True)
+        return top_out[0], scores

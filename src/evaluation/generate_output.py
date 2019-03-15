@@ -159,12 +159,13 @@ def sample_final_output(filtered_output):
     return sampled_output
 
 
-def _lexicalise_full_output(sampled_output: List[List[Tuple[str, List[int]]]], delex_fields: Dict, delex_data: Dict, lex_dummies: Dict):
+def _lexicalise_full_output(sampled_output: List[List[Tuple[str, List[int]]]], delex_fields: Dict, delex_data: Dict, lex_dummies: Dict, print_score=False):
     delex_vocab = _get_lexicalize_dict(delex_data, delex_fields)
     lexicalised_output = []
     for i, sampled_output_batch in enumerate(sampled_output):
         lexicalised_batch = []
         for oline, score in sampled_output_batch:
+            final_score = score[8]
             for lex_key, val in delex_fields.items():
                 original_token = delex_vocab[lex_key][i]
                 if original_token == '':
@@ -172,8 +173,10 @@ def _lexicalise_full_output(sampled_output: List[List[Tuple[str, List[int]]]], d
 
                 oline = oline.replace(val, original_token)
                 oline = oline.replace('The The', 'The').replace('food food', 'food').replace('the The', 'The') #postprocessing for some common errors
-
-            lexicalised_batch.append(oline + '\n')
+            if print_score:
+                lexicalised_batch.append('{}\tPredicted Correctness: {}/8\n'.format(oline, final_score))
+            else:
+                lexicalised_batch.append(oline + '\n')
         lexicalised_output.append(lexicalised_batch)
     return lexicalised_output
 
