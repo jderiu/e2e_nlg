@@ -8,7 +8,7 @@ Author:     Jan Deriu
 import os, argparse
 import random
 import flask
-import sys
+import logging
 from src.demo.demo_utils import NLGModel
 import json
 
@@ -21,7 +21,7 @@ def main(args):
 
     config_dict = json.load(open(os.path.join('configurations', config_fname)))
     model = NLGModel(config_dict)
-
+    logging.info('NLG Model Ready')
     app = flask.Flask(__name__)
 
     @app.route('/', methods=['GET'])
@@ -44,6 +44,7 @@ def main(args):
 
 
 if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     parser = argparse.ArgumentParser(description='Preprocess Data')
     parser.add_argument('-c, --config_file', dest='config', default='config_full.json', type=str,  help='Path to the config file')
     args = parser.parse_args()
