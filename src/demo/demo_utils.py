@@ -65,5 +65,5 @@ class NLGModel():
         top_outputs = select_top_outputs(merge_out_ratings)
         scores = [x[1][8] for x in top_outputs[0]]
 
-        top_out = _lexicalise_full_output(top_outputs, self.delex_fields, result, self.lex_dummies, print_score=True)
+        top_out = _lexicalise_full_output(top_outputs, self.delex_fields, result, self.lex_dummies, print_score=False)
         return top_out[0], scores
