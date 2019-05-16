@@ -16,8 +16,8 @@
   "processing_tag": "version1",
   "max_sentence_len": 256,
   "sample_constants": {
-    "utt_fw": 5,
-    "follow_fw": 5,
+    "utt_fw": 10,
+    "follow_fw": 3,
     "form": 5
   },
   "pretrain_epochs": 100,
