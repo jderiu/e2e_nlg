@@ -2,57 +2,94 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/checkout/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript"> </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="form-validation.css" rel="stylesheet">
+    <script type="text/javascript"></script>
 </head>
 <body>
-
-    <form id="nlg" class="form-signin"  method="POST" target="receiver" action="http://dialogue-eval.cloudlab.zhaw.ch:5000/generate_utterance">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        Restaurant Name: <input class="form-control" type="text" required name="name" placeholder="Name"><br>
-        Close to: <input class="form-control" type="text" name="near" placeholder="Near"><br>
-        Foot Type<input class="form-control" type="text" name="food" placeholder="Food"><br>
-        Family Friendly: <select name="familyFriendly" form="nlg">
-            <option value=""> - </option>
+<form id="nlg" class="card p-2" method="POST" target="receiver" action="http://dialogue-eval.cloudlab.zhaw.ch:5000/generate_utterance">
+    <h2 class="form-signin-heading">Enter Restaurant Details</h2>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="name"> Restaurant Name: </label>
+            <input id="name" class="form-control" type="text" required name="name" placeholder="Your Restaurant Name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="close">Close to: </label>
+            <input id="close" class="form-control" type="text" name="near" placeholder="Burger King">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="food">Food Type: </label><input id="food" class="form-control" type="text" name="food"
+                                                        placeholder="Italian">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="family">Child Friendly:</label> <select id="family" class="form-control" name="familyFriendly"
+                                                                form="nlg">
+            <option value=""> -</option>
             <option value="yes">Yes</option>
             <option value="no">No</option>
-        </select><br>
-        Price Range: <select name="priceRange" form="nlg">
-            <option value=""> - </option>
+        </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rating">Customer Rating: </label>
+            <select id="rating" name="customer rating" class="form-control" form="nlg">
+                <option value=""> -</option>
+                <option value="1 out of 5">1/5</option>
+                <option value="3 out of 5">3/5</option>
+                <option value="5 out of 5">5/5</option>
+                <option value="average">Average</option>
+                <option value="high">Hgh</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="price">Price Range:</label> <select id="price" class="form-control" name="priceRange" form="nlg">
+            <option value=""> -</option>
             <option value="cheap">Cheap</option>
             <option value="high">High</option>
-            <option value="less than £20"> Less than $20 </option>
+            <option value="less than £20"> Less than $20</option>
             <option value="moderate">Moderate</option>
             <option value="more than £30">More than $30</option>
             <option value="£20-25">$20 - 25</option>
-        </select><br>
-        Customer Rating: <select name="customer rating" form="nlg">
-            <option value=""> - </option>
-            <option value="1 out of 5">1/5</option>
-            <option value="3 out of 5">3/5</option>
-            <option value="5 out of 5">5/5</option>
-            <option value="average">Average</option>
-            <option value="high">Hgh</option>
-            <option value="low">Low</option>
-        </select><br>
-        Area: <select name="area" form="nlg">
-            <option value=""> - </option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="area">Area:</label> <select id="area" class="form-control" name="area" form="nlg">
+            <option value=""> -</option>
             <option value="city centre">City Centre</option>
             <option value="riverside">Riverside</option>
-        </select><br>
-        Type: <select name="eatType" form="nlg">
-            <option value=""> - </option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="type">Type:</label> <select id="type" class="form-control" name="eatType" form="nlg">
+            <option value=""> -</option>
             <option value="coffee shop">Coffee Shop</option>
             <option value="pub">Pub</option>
             <option value="restaurant">Restaurant</option>
-        </select><br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit"  >Generate</button>
-    </form>
+        </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Generate</button>
+        </div>
+  </div>
+</form>
 
+<div class="embed-responsive embed-responsive-21by9">
+  <iframe class="embed-responsive-item" name="receiver" id="receiver"></iframe>
+</div>
 
-
-<iframe name="receiver" id="receiver" width="1000" height="1000"></iframe>
+<iframe name="receiver" id="old_receiver" width="1000" height="1000"></iframe>
 
 </body>
 </html>
